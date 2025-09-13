@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Email Validation</title>
+   <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 320px;
+    }
+    h3 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    button {
+      width: 95%;
+      padding: 10px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    p {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+    .valid {
+      color: green;
+    }
+    .invalid {
+      color: red;
+    }
+  
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h3>Validate Email Field</h3>
+    <input type="text" id="email" placeholder="Enter your email">
+    <button type="button" onclick="validateEmail()">Validate</button>
+    <p id="result"></p>
+  </div>
+
+
+  <script>
+    function validateEmail() {
+      let email = document.getElementById("email").value;
+      let result = document.getElementById("result");
+
+      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+      if (email.trim() === "") {
+        result.innerText = "Email cannot be empty.";
+        result.className = "invalid";
+      } else if (!regex.test(email)) {
+        result.innerText = email + " is invalid (error: Invalid email format).";
+        result.className = "invalid";
+      } else {
+        result.innerText = email + " is valid.";
+        result.className = "valid";
+      }
+    }
+  </script>
+</body>
+</html>
