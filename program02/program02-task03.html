@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guess the Number - Loop Until Correct</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f0f4f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .container {
+        background: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 320px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    p {
+        margin-bottom: 20px;
+        font-size: 1em;
+        color: #555;
+    }
+
+    input {
+        padding: 10px;
+        width: 80px;
+        text-align: center;
+        font-size: 1em;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        outline: none;
+        margin-bottom: 15px;
+    }
+
+    button {
+        background: #4CAF50;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1em;
+        font-weight: bold;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s;
+        width: 100%;
+    }
+
+    button:hover {
+        background: #45a049;
+    }
+
+    .result {
+        font-size: 1.2em;
+        margin-top: 15px;
+        font-weight: bold;
+    }
+
+    .low {
+        color: #007bff;
+    }
+
+    .high {
+        color: #ff5722;
+    }
+
+    .correct {
+        color: #4CAF50;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Guess the Number</h1>
+    <p>Enter a number between 1 and 100</p>
+    <input type="number" id="userGuess" min="1" max="100">
+    <br>
+    <button onclick="checkGuess()">Check</button>
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+
+    function checkGuess() {
+        let guess = parseInt(document.getElementById("userGuess").value);
+        let result = document.getElementById("result");
+        attempts++;
+
+        if (isNaN(guess)) {
+            result.textContent = "Please enter a valid number!";
+            result.style.color = "orange";
+            return;
+        }
+
+        if (guess < randomNumber) {
+            result.textContent = "Too Low! Try again.";
+            result.className = "result low";
+        } else if (guess > randomNumber) {
+            result.textContent = "Too High! Try again.";
+            result.className = "result high";
+        } else {
+            result.textContent = 'Correct!  You guessed it in ${attempts} tries.';
+            result.className = "result correct";
+            document.getElementById("userGuess").disabled = true;
+        }
+
+        document.getElementById("userGuess").value = "";
+    }
+</script>
+
+</body>
+</html>
